@@ -1,0 +1,122 @@
+configuration {
+	font 			: "Roboto 12";
+	fixed-num-lines 	: true;
+	show-icons 		: false;
+	sidebar-mode 		: true;
+	scroll-method 		: 1;
+	click-to-exit 		: true;
+	combi-hide-mode-prefix 	: false;
+	display-drun 		: ">";
+	drun-display-format 	: "{name}";
+	sidebar-mode 		: false;
+	disable-history 	: false;
+}
+
+* {
+	trans 			: #00000000;
+	back  			: #232323FF;
+	fore 			: #C1C1C1;
+}
+
+window {
+	border 			: 0px;
+	border-color 		: @back;
+	border-radius 		: 4px;
+	padding 		: 20;
+	width 			: 45%;
+	height 			: 25%;
+	background-color 	: @back;
+	foreground-color 	: @fore;
+	anchor 			: center;
+	fullscreen 		: false;
+}
+
+mainbox {
+	enabled 		: true;
+	margin 			: 10px 10px;
+	padding 		: 10px;
+	background-color 	: @trans;
+}
+
+prompt {
+	enabled 		: false;
+	border 			: 5px;
+	border-color 		: @trans;
+	spacing 		: 4;
+	text-color 		: @fore;
+	background-color 	: @trans;
+}
+
+textbox-prompt-colon{
+	expand				: true;
+	str				: "Application";
+	margin				: 0px 4px 0px 0px;
+	text-color			: @fore;
+}
+
+entry {
+	border				: 5px 0px 0px 0px;
+	border-color			: @trans;
+	spacing				: 2;
+	background-color 		: @trans;
+	text-color			: @fore;
+	blink				: true;
+	placeholder 			: "Bruh";
+	placeholder 			: #C1C1C1;
+}
+
+inputbar {
+	children			: [prompt, entry];
+	background-color		: @trans;
+	text-color			: @fore;
+	expand				: false;
+	padding				: 1.5%;
+}
+
+
+listview {
+	background-color 		: @trans;
+	text-color			: @fore;
+	lines 				: 5;
+	columns				: 2;
+	fixed-height			: 0;
+	spacing				: 5px;
+	border				: 3px;
+	dynamic				: true;
+	layout				: vertical;
+	cycle				: false;
+	cursor 				: pointer;
+}
+
+element {
+	enabled 			: true;
+	text-color 			: @fore;
+	background-color 	 	: @trans;
+	spacing 			: 15px;
+	orientation 			: vertical;
+}
+
+element-text {
+	background-color		: @trans;
+	expand				: true;
+	/* horizontal-align		: 0.5; */
+	/* vertical-align		: 0.5; */
+	margin				: 0.5%;
+	text-color 			: inherit;
+}
+
+element selected{
+	background-color		: @trans;
+	text-color			: #C8A464; 
+	margin				: 0.3%;	
+	border				: 0% 0% 0% 0%;
+	border-color			: @trans;
+}
+
+button {
+	horizontal-align		: 0;
+	vertical-align			: 0;
+	background-color		: @trans;
+	text-color			: @fore;
+	border				: 0px;
+}

@@ -1,0 +1,90 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "mod": "dock",
+    "exclusive": true,
+    "passtrough": false,
+    "gtk-layer-shell": true,
+    "height": 0,
+
+    "modules-left": [
+        "clock",
+	"tray"
+	/*"hyprland/window"*/
+    ],
+
+    "modules-center": [],
+
+    "modules-right": [
+    	"wlr/workspaces",
+	"network",
+        "pulseaudio",
+	"battery"
+    ],
+
+    "hyprland/window": {
+        "format": "{}"
+    },
+
+    "wlr/workspaces": {
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "all-outputs": true,
+        "on-click": "activate",
+        "format": "{icon}",
+        "format-icons": {
+            "urgent": "⟳",
+            "active": "◽",
+            "default": "◾"
+	    }
+    },
+
+    "tray": {
+        "icon-size": 12,
+        "tooltip": false,
+        "spacing": 10
+    },
+
+    "clock": {
+        "format": "{:%H.%M  %a %b %d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "pulseaudio": {
+        "format": "🔊 {volume}%",
+        "tooltip": false,
+        "format-muted": "🔊 N/A",
+        "on-click": "changeVolume toggle",
+        "on-scroll-up": "changeVolume 5%+",
+        "on-scroll-down": "changeVolume 5%-",
+        "scroll-step": 5
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "tooltip": false,
+        "format-source": "音入：{volume}パ",
+        "format-source-muted": "音声入力：無",
+        "on-click": "amixer set Capture toggle",
+        "on-scroll-up": "amixer set Capture 5%+",
+        "on-scroll-down": "amixer set Capture 5%-",
+        "scroll-step": 5
+    },
+
+    "network": {
+	"format-wifi": "📡 {essid} {signalStrength}%",
+	"format-ethernet": "📡 {signalStrength}%",
+	"tooltip-format": "接続先:{essid}　アドレス：{No IP}",
+	"format-disconnected": "📡 N/A"
+    },
+
+    "battery": {
+    	"states": {
+		"warning": 20,
+		"critical": 15
+	},
+	"format": "🔋 {capacity}%",
+	"format-charging": "🔌 {capacity}%",
+	"format-plugged": "🔌 {capacity}%"
+    }
+}

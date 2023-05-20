@@ -1,0 +1,47 @@
+[global]
+follow = mouse
+width = 400
+height = 300
+notification_limit = 3
+origin = bottom-right
+offset = 10x10
+indicate_hidden = true
+separator_height = 0
+padding = 30
+horizontal_padding = 30
+frame_width = 2
+sort = false
+idle_threshold = 0
+layer = top
+gap_size = 0
+font = Roboto 12
+line_height = 4
+dmenu = /usr/bin/rofi -no-lazy-grab -dmenu -theme /home/kaon/.config/rofi/kMenu
+browser = /usr/bin/firefox -new-tab
+corner_radius = 8
+mouse_middle_click = context
+markup = full
+icon_position = off
+close = ctrl+space
+close_all = ctrl+shift+space
+history = ctrl+grave
+context = ctrl+shift+period
+format = "%b\n<small><b>%s</b></small>"
+
+[urgency_low]
+timeout = 4
+background = "#202020"
+foreground = "#F2F1F0"
+frame_color = "#474747ff"
+
+[urgency_normal]
+timeout = 8
+background = "#202020"
+foreground = "#F2F1F0"
+frame_color = "#474747ff"
+
+[urgency_critical]
+timeout = 0
+background = "#300000"
+foreground = "#F2F1F0"
+frame_color = "#474747ff"

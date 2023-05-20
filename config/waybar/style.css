@@ -1,0 +1,133 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Roboto, monospace;
+    font-weight: bold;
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #202020;
+    color: #F1F1F1;
+}
+
+tooltip {
+    background: #202020;
+    border-radius: 8px;
+}
+
+#workspaces button {
+    padding: 5px;
+    color: #F1F1F1;
+    margin-right: 5px;
+}
+
+#workspaces button.active {
+    color: #F1F1F1;
+}
+
+#workspaces button.focused {
+    color: #F1F1F1;
+    background: #202020;
+    border-radius: 10px;
+}
+
+#workspaces button.urgent {
+    color: #F1F1F1;
+    background: #202020;
+    border-radius: 10px;
+}
+
+#workspaces button:hover {
+    background: #F1F1F1;
+    color: #202020;
+}
+
+#custom-language,
+#custom-updates,
+#custom-caffeine,
+#custom-weather,
+#window,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#workspaces,
+#tray,
+#backlight {
+    background: #202020;
+    padding: 0px 10px;
+    margin: 0px;
+}
+
+#tray {
+    margin-right: 10px;
+}
+
+#workspaces {
+    color: #F1F1F1;
+    margin-left: 10px;
+    padding-right: 0px;
+    padding-left: 5px;
+}
+
+#custom-caffeine {
+    color: #F1F1F1;
+    border-right: 0px;
+    margin-left: 10px;
+}
+
+#custom-language {
+    color: #F1F1F1;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#custom-updates {
+    color: #F1F1F1;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#window {
+    color: #F1F1F1;
+    border-radius: 10px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+#clock {
+    color: #F1F1F1;
+    margin-left: 5px;
+    border-right: 0px;
+}
+
+#network {
+    color: #F1F1F1;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#pulseaudio {
+    color: #F1F1F1;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#pulseaudio.microphone {
+    color: #F1F1F1;
+    margin-right: 5px;
+}
+
+#battery {
+    color: #F1F1F1;
+    margin-right: 10px;
+    border-left: 0px;
+}
+
+#custom-weather {
+    color: #F1F1F1;
+    border-right: 0px;
+    margin-left: 0px;
+}
