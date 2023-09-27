@@ -1,0 +1,87 @@
+#!/bin/bash
+
+heifcnt=0
+heiccnt=0
+currentfolder=$(pwd)
+
+case "$1" in
+	--png)
+		echo ":: Converting everything to PNG format"
+		filetype="png"
+		;;
+	*)
+		echo ":: Converting everything to JPG format"
+		filetype="jpg"
+		;;
+esac
+
+for file in $currentfolder/*; do 
+	if [[ $file == *.HEIC ]]; then
+		if [[ $filetype = "jpg" ]]; then
+			if [ -f "${file%.*}.jpg" ]; then
+				echo ":: Skipping. File ${file} already converted"
+			else
+				((heiccnt++))
+    				heif-convert "$file" "${file%.*}.$filetype"
+			fi
+		elif [[ $filetype = "png" ]]; then
+			if [ -f "${file%.*}.png" ]; then
+				echo ":: Skipping. File ${file} already converted"
+			else
+				((heiccnt++))
+    				heif-convert "$file" "${file%.*}.$filetype"
+			fi
+		fi
+	elif [[ $file == *.heic ]]; then
+		if [[ $filetype = "jpg" ]]; then
+			if [ -f "${file%.*}.jpg" ]; then
+				echo ":: Skipping. File ${file} already converted"
+			else
+				((heiccnt++))
+    				heif-convert "$file" "${file%.*}.$filetype"
+			fi
+		elif [[ $filetype = "png" ]]; then
+			if [ -f "${file%.*}.png" ]; then
+				echo ":: Skipping. File ${file} already converted"
+			else
+				((heiccnt++))
+    				heif-convert "$file" "${file%.*}.$filetype"
+			fi
+		fi
+	elif [[ $file == *.HEIF ]]; then
+		if [[ $filetype = "jpg" ]]; then
+			if [ -f "${file%.*}.jpg" ]; then
+				echo ":: Skipping. File ${file} already converted"
+			else
+				((heifcnt++))
+    				heif-convert "$file" "${file%.*}.$filetype"
+			fi
+		elif [[ $filetype = "png" ]]; then
+			if [ -f "${file%.*}.png" ]; then
+				echo ":: Skipping. File ${file} already converted"
+			else
+				((heifcnt++))
+    				heif-convert "$file" "${file%.*}.$filetype"
+			fi
+		fi
+	elif [[ $file == *.heif ]]; then
+		if [[ $filetype = "jpg" ]]; then
+			if [ -f "${file%.*}.jpg" ]; then
+				echo ":: Skipping. File ${file} already converted"
+			else
+				((heifcnt++))
+    				heif-convert "$file" "${file%.*}.$filetype"
+			fi
+		elif [[ $filetype = "png" ]]; then
+			if [ -f "${file%.*}.png" ]; then
+				echo ":: Skipping. File ${file} already converted"
+			else
+				((heifcnt++))
+    				heif-convert "$file" "${file%.*}.$filetype"
+			fi
+		fi
+	fi
+done
+
+printf '\n:: .heic converted: %d file(s)\n' "$heiccnt"
+printf ':: .heif converted: %d file(s)\n' "$heifcnt"
