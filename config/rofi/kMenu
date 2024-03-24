@@ -1,5 +1,5 @@
 configuration {
-	font 			: "Roboto 12";
+	font 			: "Roboto Bold 12";
 	fixed-num-lines 	: true;
 	show-icons 		: false;
 	sidebar-mode 		: true;
@@ -23,8 +23,8 @@ window {
 	border-color 		: @back;
 	border-radius 		: 4px;
 	padding 		: 20;
-	width 			: 45%;
-	height 			: 25%;
+	width 			: 20%;
+	height 			: 50%;
 	background-color 	: @back;
 	foreground-color 	: @fore;
 	anchor 			: center;
@@ -77,8 +77,8 @@ inputbar {
 listview {
 	background-color 		: @trans;
 	text-color			: @fore;
-	lines 				: 5;
-	columns				: 2;
+	lines 				: 2;
+	columns				: 1;
 	fixed-height			: 0;
 	spacing				: 5px;
 	border				: 3px;
@@ -99,15 +99,13 @@ element {
 element-text {
 	background-color		: @trans;
 	expand				: true;
-	/* horizontal-align		: 0.5; */
-	/* vertical-align		: 0.5; */
 	margin				: 0.5%;
 	text-color 			: inherit;
 }
 
 element selected{
-	background-color		: @trans;
-	text-color			: #C8A464; 
+	background-color		: @fore;
+	text-color			: @back; 
 	margin				: 0.3%;	
 	border				: 0% 0% 0% 0%;
 	border-color			: @trans;

@@ -20,7 +20,7 @@ set showmatch
 set mat=2
 set smarttab
 set laststatus=2
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 set autoread
 set completeopt
 set hidden
@@ -54,7 +54,6 @@ call plug#begin()
  Plug 'jacoborus/tender.vim'
  Plug 'tpope/vim-surround'
  Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
- Plug 'lukas-reineke/indent-blankline.nvim'
  Plug 'nvim-treesitter/nvim-treesitter'
  Plug 'kevinhwang91/nvim-hlslens'
  Plug 'NvChad/nvim-colorizer.lua'
@@ -69,16 +68,6 @@ colorscheme tender
 lua << EOF
 
 vim.opt.list = true
-vim.opt.listchars:append "eol:↴"
-
-require("indent_blankline").setup {
-    -- for example, context is off by default, use this to turn it on
-    show_current_context = true,
-    show_current_context_start = true,
-    show_end_of_line = true,
-    space_char_blankline = " ",
-
-}
 
 require('hlslens').setup()
 
@@ -111,5 +100,15 @@ require('nvim-cursorline').setup {
     hl = { underline = true },
   }
 }
+
+require('modicator').setup({
+	show_warnings = true,
+	highlights = {
+		defaults = {
+			bold = false,
+			italic = false
+			},
+		},
+})
 
 EOF

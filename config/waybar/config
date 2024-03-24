@@ -8,74 +8,86 @@
     "height": 0,
 
     "modules-left": [
-        "clock",
+	"clock",
 	"tray"
-	/*"hyprland/window"*/
     ],
 
-    "modules-center": [],
+    "modules-center": [
+    ],
 
     "modules-right": [
-    	"wlr/workspaces",
+    	"hyprland/workspaces",
 	"network",
         "pulseaudio",
 	"battery"
     ],
-
-    "hyprland/window": {
-        "format": "{}"
-    },
-
-    "wlr/workspaces": {
-        "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "all-outputs": true,
-        "on-click": "activate",
-        "format": "{icon}",
-        "format-icons": {
-            "urgent": "⟳",
-            "active": "◽",
-            "default": "◾"
-	    }
+    
+    "custom/pacman": {
+    	"format": "{icon}",
+	"return-type": "json",
+	"format-icons": {
+		"pending-updates": "🆙",
+		"updated": ""
+	},
+	"exec-if": "which waybar-updates",
+	"exec": "waybar-updates"
     },
 
     "tray": {
         "icon-size": 12,
-        "tooltip": false,
-        "spacing": 10
+	"show-passive-items": true,
+        "spacing": 12
+    },
+
+    "cpu": {
+    	"interval": 1,
+	"format": "{icon0} {icon1} {icon2} {icon3}",
+	"tooltip": true,
+	"tooltip-format": "{icon0} {icon1} {icon2} {icon3}",
+	"format-icons": ["🟢", "🟡", "🟠", "🔴"]
     },
 
     "clock": {
-        "format": "{:%H.%M  %a %b %d}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n\n<tt><small>{calendar}</small></tt>"
+        "format": "{:%H.%M <span size='8pt'> %a %b %d</span>}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode": "month",
+			"weeks-pos": "",
+			"on-scroll": 1,
+			"format": {
+				"months": "<span size='12pt' font_family='Roboto'><b>📅 {}</b></span>", 
+				"days": "<span size='10pt'><b>{}</b></span>", 
+				"weeks": "<span size='10pt'><b>{}</b></span>", 
+				"weekdays": "<span size='10pt'><b>{}</b></span>", 
+				"today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+			}
+		},
+	"actions": {
+		"on-scroll-up": "shift_down",
+		"on-scroll-down": "shift_up"
+	}
     },
 
     "pulseaudio": {
-        "format": "🔊 {volume}%",
-        "tooltip": false,
-        "format-muted": "🔊 N/A",
-        "on-click": "changeVolume toggle",
-        "on-scroll-up": "changeVolume 5%+",
-        "on-scroll-down": "changeVolume 5%-",
-        "scroll-step": 5
-    },
-
-    "pulseaudio#microphone": {
-        "format": "{format_source}",
-        "tooltip": false,
-        "format-source": "音入：{volume}パ",
-        "format-source-muted": "音声入力：無",
-        "on-click": "amixer set Capture toggle",
-        "on-scroll-up": "amixer set Capture 5%+",
-        "on-scroll-down": "amixer set Capture 5%-",
-        "scroll-step": 5
+        "format": "{icon} <span size='8pt'>{volume}%</span>",
+        "tooltip": true,
+	"tooltip-format": "ℹ️: {desc}",
+        "format-muted": "",
+        "on-click": "if [ $(pamixer --get-mute) == true ]; then pamixer --unmute; else pamixer --mute; fi",
+        "on-scroll-up": "pamixer -i 2",
+        "on-scroll-down": "pamixer -d 2",
+        "scroll-step": 2,
+	"reverse-scrolling": true,
+	"format-icons": ["🔈", "🔉", "🔊"]
     },
 
     "network": {
-	"format-wifi": "📡 {essid} {signalStrength}%",
-	"format-ethernet": "📡 {signalStrength}%",
-	"tooltip-format": "接続先:{essid}　アドレス：{No IP}",
-	"format-disconnected": "📡 N/A"
+	"format-wifi": "📡 <span size='8pt'>{bandwidthTotalBits}</span>",
+	"format-ethernet": "📡 {bandwidthTotalBits}",
+	"tooltip-format-wifi": "🔗: {essid}\n🏠: {ipaddr}\n⛩️: {gwaddr}\n🎭: {netmask} | {cidr}",
+	"tooltip-format-ethernet": "🔗: {ifname}\n🏠: {ipaddr}",
+	"format-disconnected": "",
+	"on-click": "nm-connection-editor"
     },
 
     "battery": {
@@ -83,8 +95,11 @@
 		"warning": 20,
 		"critical": 15
 	},
-	"format": "🔋 {capacity}%",
-	"format-charging": "🔌 {capacity}%",
-	"format-plugged": "🔌 {capacity}%"
+	"format": "{icon} <span size='8pt'>{capacity}%</span>",
+	"interval": 5,
+	"format-charging": "🔌 <span size='8pt'>{capacity}%</span>",
+	"format-plugged": "⚡ <span size='8pt'>{capacity}%</span>",
+	"tooltip-format": "⚡: {power}W\nℹ️: {timeTo}",
+	"format-icons": ["🪫", "🔋", "🔋", "🔋", "🔋"]
     }
 }

@@ -1,0 +1,17 @@
+#
+# Highlights make output.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# function make {
+
+if zstyle -t ':prezto:module:utility:make' color \
+      && (( $+commands[colormake] )); then
+  command colormake "$@"
+else
+  command make "$@"
+fi
+
+# }

@@ -1,0 +1,114 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+autoload -Uz promptinit
+promptinit
+prompt walters
+
+# Keep history of `cd` as in with `pushd` and make `cd -<TAB>` work.
+DIRSTACKSIZE=16
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushd_minus
+setopt prompt_subst
+
+# Ignore lines prefixed with '#'.
+setopt interactivecomments
+
+# Ignore duplicate in history.
+setopt hist_ignore_dups
+
+# Prevent record in history entry if preceding them with at least one space
+setopt hist_ignore_space
+
+# Nobody need flow control anymore. Troublesome feature.
+#stty -ixon
+setopt noflowcontrol
+
+# Aliases
+alias cp='cp -iv --reflink=auto'
+alias rcp='rsync -v --progress'
+alias rmv='rsync -v --progress --remove-source-files'
+alias mv='mv -iv'
+alias rm='rm -iv'
+alias rmdir='rmdir -v'
+alias ln='ln -v'
+alias chmod="chmod -c"
+alias chown="chown -c"
+alias mkdir="mkdir -v"
+alias grep='grep --colour=auto'
+alias egrep='egrep --colour=auto'
+alias :q='exit'
+alias icat='kitte icat'
+alias s='kitten ssh'
+alias unused='pacman -Qtdq | sudo pacman -Rns -'
+
+# Kitty completion
+# source <(kitty + complete setup zsh)
+
+# Pacman Command Not Found Handler
+function command_not_found_handler {
+    local purple='\e[1;35m' bright='\e[0;1m' green='\e[1;32m' reset='\e[0m'
+    printf 'zsh: command not found: %s\n' "$1"
+    local entries=(
+        ${(f)"$(/usr/bin/pacman -F --machinereadable -- "/usr/bin/$1")"}
+    )
+    if (( ${#entries[@]} ))
+    then
+        printf "${bright}$1${reset} may be found in the following packages:\n"
+        local pkg
+        for entry in "${entries[@]}"
+        do
+            # (repo package version file)
+            local fields=(
+                ${(0)entry}
+            )
+            if [[ "$pkg" != "${fields[2]}" ]]
+            then
+                printf "${purple}%s/${bright}%s ${green}%s${reset}\n" "${fields[1]}" "${fields[2]}" "${fields[3]}"
+            fi
+            printf '    /%s\n' "${fields[4]}"
+            pkg="${fields[2]}"
+        done
+    fi
+    return 127
+}
+
+# Rehash
+
+zshcache_time="$(date +%s%N)"
+
+autoload -Uz add-zsh-hook
+
+rehash_precmd() {
+  if [[ -a /var/cache/zsh/pacman ]]; then
+    local paccache_time="$(date -r /var/cache/zsh/pacman +%s%N)"
+    if (( zshcache_time < paccache_time )); then
+      rehash
+      zshcache_time="$paccache_time"
+    fi
+  fi
+}
+
+add-zsh-hook -Uz precmd rehash_precmd
+
+export VITASDK=/usr/local/vitasdk
+export PATH=$VITASDK/bin:$PATH
+export QT_QPA_PLATFORMTHEME=qt5ct
+# Customize to your needs...
+export PATH=$PATH:/home/kaon/.spicetify
+source ~/.commacd.sh
+export XMODIFIERS='@im=fcitx'
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx

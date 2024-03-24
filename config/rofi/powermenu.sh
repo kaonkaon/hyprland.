@@ -6,9 +6,9 @@ dir="$HOME/.config/rofi"
 
 rofi_command="rofi -theme $dir/$theme"
 
-shutdown="Teagain Ciuir"
-reboot="Se'a Citour"
-suspend="Cinou Teaseur"
+shutdown="Shutdown"
+reboot="Reboot"
+suspend="Suspend"
 
 confirm_exit() {
 	rofi -dmenu\
