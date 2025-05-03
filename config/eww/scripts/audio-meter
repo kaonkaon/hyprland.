@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Check for arecord (part of ALSA utils)
+if ! command -v arecord &> /dev/null; then
+    echo "arecord not found. Install it with: sudo apt install alsa-utils"
+    exit 1
+fi
+
+# Number of samples to read per iteration
+sample_rate=16000
+chunk_size=2048  # Samples per read (roughly 4ms chunk at 16kHz)
+
+# Function to compute RMS (Root Mean Square) loudness
+compute_loudness() {
+    # Read raw audio data using arecord
+    arecord -f S16_LE -r $sample_rate -c 1 -d 1 | \
+    od -An -t d2 | \
+    awk '
+        {
+            sum = 0
+            for (i = 1; i <= NF; i++) {
+                sum += $i * $i  # Square the sample for RMS calculation
+            }
+            rms = sqrt(sum / NF)  # RMS calculation
+            print rms
+        }
+    '
+}
+
+# Function to draw a loudness bar
+draw_bar() {
+    loudness=$1
+    bar_width=8
+    # Scale loudness to fit the bar width
+    scaled_loudness=$(( loudness * bar_width / 255 ))
+    empty=$(( bar_width - scaled_loudness ))
+
+    bar=$(printf "%0.s█" $(seq 1 $scaled_loudness))
+    bar+=$(printf "%0.s░" $(seq 1 $empty))
+
+    echo "Audio Loudness: [$bar] $loudness"
+}
+
+# Main loop to read and display loudness in real-time
+while true; do
+    # Get loudness from audio input (raw RMS)
+    loudness=$(compute_loudness)
+    
+    # Only display loudness if it's above a threshold to avoid noise
+    if (( loudness > 50 )); then
+        draw_bar $loudness
+    fi
+    
+    # Sleep for a bit before next check
+    sleep 0.1
+done
+

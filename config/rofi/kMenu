@@ -1,50 +1,49 @@
 configuration {
-	font 			: "Roboto Bold 12";
-	fixed-num-lines 	: true;
-	show-icons 		: false;
-	sidebar-mode 		: true;
-	scroll-method 		: 1;
-	click-to-exit 		: true;
-	combi-hide-mode-prefix 	: false;
-	display-drun 		: ">";
-	drun-display-format 	: "{name}";
-	sidebar-mode 		: false;
-	disable-history 	: false;
+	font 				: "EnvyCodeR Nerd Font Propo 14";
+	show-icons 			: false;
+	sidebar-mode 			: true;
+	scroll-method 			: 1;
+	click-to-exit 			: true;
+	combi-hide-mode-prefix 		: false;
+	display-drun 			: ">";
+	drun-display-format 		: "{name}";
+	sidebar-mode 			: false;
+	disable-history 		: false;
 }
 
 * {
-	trans 			: #00000000;
-	back  			: #232323FF;
-	fore 			: #C1C1C1;
+	trans 				: #00000000;
+	back  				: #232323FF;
+	fore 				: #C1C1C1;
 }
 
 window {
-	border 			: 0px;
-	border-color 		: @back;
-	border-radius 		: 4px;
-	padding 		: 20;
-	width 			: 20%;
-	height 			: 50%;
-	background-color 	: @back;
-	foreground-color 	: @fore;
-	anchor 			: center;
-	fullscreen 		: false;
+	border 				: 0px;
+	border-color 			: @back;
+	border-radius 			: 0px;
+	padding 			: 0;
+	width 				: 100%;
+	background-color 		: @back;
+	foreground-color 		: @fore;
+	fullscreen 			: false;
+	anchor				: north;
+	location			: north;
 }
 
 mainbox {
-	enabled 		: true;
-	margin 			: 10px 10px;
-	padding 		: 10px;
-	background-color 	: @trans;
+	enabled 			: true;
+	margin 				: 10px 10px;
+	padding 			: 10px;
+	background-color 		: @trans;
 }
 
 prompt {
-	enabled 		: false;
-	border 			: 5px;
-	border-color 		: @trans;
-	spacing 		: 4;
-	text-color 		: @fore;
-	background-color 	: @trans;
+	enabled 			: false;
+	border 				: 5px;
+	border-color 			: @trans;
+	spacing 			: 4;
+	text-color 			: @fore;
+	background-color 		: @trans;
 }
 
 textbox-prompt-colon{
@@ -77,7 +76,6 @@ inputbar {
 listview {
 	background-color 		: @trans;
 	text-color			: @fore;
-	lines 				: 2;
 	columns				: 1;
 	fixed-height			: 0;
 	spacing				: 5px;

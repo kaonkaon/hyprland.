@@ -1,0 +1,98 @@
+* {
+    font-size: 20px;
+    border: none;
+    font-family: EnvyCodeR Nerd Font Mono;
+    font-weight: Bold;
+    min-height: 0;
+    border-radius: 0px;
+    padding: 7px;
+}
+
+window#waybar {
+    color: @theme_fg_color;
+    background: @theme_bg_color;
+}
+
+tooltip {
+    background: @theme_bg_color;
+}
+
+#workspaces button {
+    color: @theme_fg_color;
+}
+
+#workspaces button.active {
+    color: @theme_selected_bg_color;
+    background: @theme_bg_color;
+}
+
+#workspaces button.focused {
+    color: @theme_fg_color;
+    background: @theme_bg_color;
+}
+
+#workspaces button.urgent {
+    color: @theme_fg_color;
+    background: @theme_bg_color;
+}
+
+#workspaces button:hover {
+    background: @theme_fg_color;
+    color: @theme_bg_color;
+}
+
+#custom-language,
+#custom-updates,
+#custom-caffeine,
+#custom-weather,
+#window,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#workspaces,
+#tray,
+#cpu,
+#backlight {
+    background: @theme_bg_color;
+}
+
+#tray {
+    margin-right: 10px;
+}
+
+#workspaces {
+    color: @theme_text_color;
+}
+
+#window {
+    color: @theme_text_color;
+}
+
+#clock {
+    color: @theme_text_color;
+}
+
+#network {
+    color: @theme_text_color;
+}
+
+#pulseaudio {
+    color: @theme_text_color;
+}
+
+#pulseaudio.microphone {
+    color: @theme_text_color;
+}
+
+#battery {
+    color: @theme_text_color;
+}
+
+#battery.warning:not(.charging) {
+    color: #C4E969;
+}
+
+#battery.critical:not(.charging) {
+    color: #B7416E;
+}

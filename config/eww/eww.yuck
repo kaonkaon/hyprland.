@@ -1,0 +1,217 @@
+(defvar IMAGE "images/iwak.jpg")
+
+(defpoll time-poll :interval "10s" "date '+%H.%M %a %b %d'")
+(defpoll uptime-poll :interval "1s" "scripts/uptime")
+(defpoll cpu-bar-0-poll :interval "1s" "scripts/cpu-bar 0")
+(defpoll cpu-bar-1-poll :interval "1s" "scripts/cpu-bar 1")
+(defpoll cpu-bar-2-poll :interval "1s" "scripts/cpu-bar 2")
+(defpoll cpu-bar-3-poll :interval "1s" "scripts/cpu-bar 3")
+(defpoll mem-bar-poll :interval "1s" "scripts/mem-bar ram")
+(defpoll swap-bar-poll :interval "1s" "scripts/mem-bar swap")
+(defpoll kernel-release-poll :interval "5m" "uname -r")
+(defpoll kernel-name-poll :interval "5m" "uname -s")
+(defpoll name-poll :interval "5m" "h=$(uname -n); u=$(whoami); echo $u @ $h")
+(defpoll core0-temp-poll :interval "10s" "sensors | grep 'Core 0' | awk '{print $3}'")
+(defpoll core1-temp-poll :interval "10s" "sensors | grep 'Core 1' | awk '{print $3}'")
+(defpoll net-stat-poll :interval "10s" "scripts/network-status connectivity")
+(defpoll net-interface-poll :interval "10s" "scripts/network-status interface")
+(defpoll net-ssid-poll :interval "10s" "scripts/network-status ssid")
+
+(defwidget show-image []
+	(box	:halign "center"
+		:spacing 16
+
+		(image :path "images/iwak.jpg" :image-width 300 :preserve-aspect-ratio true)
+	)
+)
+
+(defwidget net-widget []
+	(box	:orientation "h"
+		:halign "start"
+		:space-evenly "false"
+		:spacing 16:w
+
+		
+		(box	:orientation "h"
+			:space-evenly "false"
+			
+			(label :text "NET_STAT: " :class "varlabel")
+			(label :text net-stat-poll)
+		)
+
+		(box	:orientation "h"
+			:space-evenly "false"
+			
+			(label :text "NET_INTERFACE: " :class "varlabel")
+			(label :text net-interface-poll)
+		)
+
+		(box	:orientation "h"
+			:space-evenly "false"
+		
+			(label :text "NET_SSID: " :class "varlabel")
+			(label :text net-ssid-poll)
+		)
+	)
+)
+
+(defwidget uptime-widget []
+	(box	:orientation "h"
+		:halign "start"
+		:space-evenly "false"
+		:spacing 16
+		
+		(box	:orientation "h"
+			:space-evenly "false"
+			
+			(label :text "CUR_TIMES: " :class "varlabel")
+			(label :text time-poll)
+		)
+
+		(box	:orientation "h"
+			:space-evenly "false"
+			(label :text "UP_TIMES: " :class "varlabel")
+			(label :text uptime-poll)
+		)
+	)
+)
+
+(defwidget mem-bar-widget []
+	(box	:orientation "h"
+		:halign "start"
+		:space-evenly "false"
+		:spacing 16
+	
+		(box	:orientation "h"
+			:space-evenly "false"
+			
+			(label :text "MEM: " :class "varlabel")
+			(label :text mem-bar-poll)
+		)
+
+		(box	:orientation "h"
+			:space-evenly "false"
+			
+			(label :text "SWAP: " :class "varlabel")
+			(label :text swap-bar-poll)
+		)
+	)
+)
+
+(defwidget cpu-bar-widget []
+	(box	:orientation "h"
+		:halign "start"
+		:space-evenly "false"
+		:spacing 16
+		
+		(box	:orientation "h"
+			:space-evenly "false"
+		
+			(label :text "CPU_0: " :class "varlabel")
+			(label :text cpu-bar-0-poll)
+		)
+		
+		(box	:orientation "h"
+			:space-evenly "false"
+		
+			(label :text "CPU_1: " :class "varlabel")
+			(label :text cpu-bar-1-poll)
+		)
+		
+		(box	:orientation "h"
+			:space-evenly "false"
+		
+			(label :text "CPU_2: " :class "varlabel")
+			(label :text cpu-bar-2-poll)
+		)
+		
+		(box	:orientation "h"
+			:space-evenly "false"
+		
+			(label :text "CPU_3: " :class "varlabel")
+			(label :text cpu-bar-3-poll)
+		)
+
+	)		
+)
+
+(defwidget core-temp-widget []
+	(box	:orientation "h"
+		:halign "start"
+		:spacing 16
+
+		(box	:orientation "h"
+			:space-evenly "false"
+			
+			(label :text "CORE0_TMP: " :class "varlabel")
+			(label :text core0-temp-poll)
+
+		)
+		(box	:orientation "h"
+			:space-evenly "false"
+			
+			(label :text "CORE1_TMP: " :class "varlabel")
+			(label :text core1-temp-poll)
+		)
+	)		
+)
+	
+(defwidget os-info-widget []
+	(box	:orientation "h"
+		:halign "start"
+		:space-evenly "false"
+		:spacing 16
+
+		(box	:orientation "h"
+			:space-evenly "false"
+
+			(label :text "NAME: " :class "varlabel")
+			(label :text kernel-name-poll)
+		)
+		
+		(box	:orientation "h"
+			:space-evenly "false"
+
+			(label :text "RELEASE: " :class "varlabel")
+			(label :text kernel-release-poll)
+		)
+
+	)
+)
+
+(defwidget sysinfo-widget []
+	(box 	:orientation "v" 
+		:halign "start" 
+		:valign "start"
+		:space-evenly false
+	
+		(os-info-widget)
+		(uptime-widget)
+		(cpu-bar-widget)
+		(core-temp-widget)
+		(mem-bar-widget)
+		(net-widget)
+		(box	:orientation "h"
+			:space-evenly "false"
+			:class "nameinfo"
+			:halign "start"
+			
+			(label :text "[ ")
+			(label :text name-poll)
+			(label :text " ]")
+		)
+	)
+)
+
+(defwindow sysinfo
+	:monitor 0
+	:geometry 	(geometry 	:x "10px" 
+					:y "10px" 
+					:width "600px" 
+					:height "30px" 
+					:anchor "bottom left"
+			)
+	:stacking "bg"
+	:exclusive false
+	(sysinfo-widget)
+)

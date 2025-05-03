@@ -1,42 +1,51 @@
-#!/sbin/bash
-
+#!/bin/bash
 
 theme="kMenu"
 dir="$HOME/.config/rofi"
-
-rofi_command="rofi -theme $dir/$theme"
+rofi_command="rofi -theme $dir/$theme -no-fixed-num-lines"
 
 shutdown="Shutdown"
 reboot="Reboot"
+logout="Logout"
 suspend="Suspend"
 
 confirm_exit() {
-	rofi -dmenu\
-		-i\
-		-no-fixed-num-lines\
-		-p "Are You Sure? : "\
-		-theme $dir/$theme
+	confirm=$(printf "No\nYes" | $rofi_command -dmenu -i -lines 2 -p "Are You Sure?")
+
+	[[ "$confirm" == "Yes" ]]
 }
 
-msg() {
-	rofi -theme "$dir/$theme" -e "Available Options  -  yes / y / no / n"
-}
-
-options="$shutdown\n$reboot\n$suspend"
-
+options="$shutdown\n$reboot\n$logout\n$suspend"
 uptime=$(uptime -p | sed -e 's/up //g')
 
-chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 2)"
+chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -lines 4 -selected-row 2)"
 case $chosen in
-    $shutdown)
+    	$shutdown)
+		if confirm_exit; then
 			systemctl poweroff
+		fi
         ;;
-    $reboot)
+    	$reboot)
+		if confirm_exit; then
 			systemctl reboot
+		fi
         ;;
-    $suspend)
-			mpc -q pause
+	$logout)
+		if confirm_exit; then
+			# try gracefully exit apps
+			HYPRCMDS=$(hyprctl -j clients | jq -j '.[] | "dispatch closewindow address:\(.address); "')
+			hyprctl --batch "$HYPRCMDS" >> /tmp/hypr/hyrpexitwithgrace.log 2>&1
+		
+			# then logout
+			hyprctl dispatch exit
+		fi
+	;;
+    	$suspend)
+		if confirm_exit; then
+			# mute all
 			amixer set Master mute
 			systemctl suspend
+		fi
         ;;
+
 esac

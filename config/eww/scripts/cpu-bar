@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Check if a core number was provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <core_number>"
+    exit 1
+fi
+
+core_target="$1"
+
+# Get per-core CPU usage sample
+mpstat -P "$core_target" 1 1 | awk -v target="$core_target" '
+/^[0-9]+/ && $3 ~ /^[0-9]+$/ {
+    core=$3
+    if (core == target) {
+        idle=$(NF)
+        usage=100 - idle
+        usage_int=int(usage + 0.5)
+
+        bar_width=8
+        filled=int(usage_int * bar_width / 100)
+        empty=bar_width - filled
+
+        bar=""
+        for (i = 0; i < filled; i++) bar = bar "█"
+        for (i = 0; i < empty; i++) bar = bar "░"
+
+        printf("[ %s ]\n", bar)
+    }
+}'
+

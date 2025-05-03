@@ -1,0 +1,128 @@
+{
+    "layer": "bottom",
+    "position": "right",
+    "mode": "overlay",
+    "exclusive": false,
+    "passtrough": false,
+    "gtk-layer-shell": true,
+    "height": 0,
+    "name": "verBar",
+
+    "modules-left": [
+	"clock",
+	"image#art"
+    ],
+
+    "modules-center": [
+    ],
+
+    "modules-right": [
+	"network",
+    	"cpu",
+	"memory",
+        "pulseaudio",
+	"battery"
+    ],
+    
+    "tray": {
+        "icon-size": 12,
+	"show-passive-items": true,
+        "spacing": 12,
+	"reverse-direction": true
+    },
+
+    "image#art": {
+	"path": "~/Pictures/saku.jpeg",
+	"size": 32,
+	"interval": 30
+    },
+
+    "memory": {
+    	"class": "verBar",
+    	"interval": 20,
+	"format": "MEM: [ {icon} ] <span size='12pt'>{percentage}%</span>",
+	"tooltip-format": "MEMORY_TOTAL: {total}GiB\nSWAP_TOTAL: {swapTotal}GiB\n\nMEMORY_USED: {used:0.1f}GiB\nSWAP_USED: {swapUsed:0.1f}GiB",
+	"format-icons": ["░░░░░░░░", "█░░░░░░░", "██░░░░░░", "███░░░░░", "████░░░░", "█████░░░", "██████░░", "<span color='#B7416E'>!!HIGH!!</span>", "<span color='#B7416E'>CRITICAL</span>"]
+    },
+
+    "hyprland/workspaces": {
+    	"active-only": false,
+	"format": "[ {icon} ]",
+	"format-icons": {
+		"1": "i",
+		"2": "r",
+		"3": "h",
+		"4": "n",
+		"5": "ho",
+		"6": "he",
+		"7": "t",
+		"8": "c",
+		"9": "ri",
+		"10": "nu"
+	}
+    },
+
+    "cpu": {
+    	"interval": 1,
+	"format": "CPU_LOAD: {load}\nCPU_0: [ {icon0} ] <span size='12pt'>{usage0}%</span>\tCPU_1: [ {icon1} ] <span size='12pt'>{usage1}%</span>\nCPU_2: [ {icon2} ] <span size='12pt'>{usage2}%</span>\tCPU_3: [ {icon3} ] <span size='12pt'>{usage3}%</span>",
+	"tooltip": true,
+	"tooltip-format": "{icon0} {icon1} {icon2} {icon3}",
+	"format-icons": ["░░░░░░░░", "█░░░░░░░", "██░░░░░░", "███░░░░░", "████░░░░", "█████░░░", "██████░░", "<span color='#B7416E'>!!HIGH!!</span>", "<span color='#B7416E'>CRITICAL</span>"]
+    },
+
+    "clock": {
+        "format": "[ CLK: {:%H.%M <span size='8pt'> %a %b %d</span>} ]",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode": "month",
+			"weeks-pos": "",
+			"on-scroll": 1,
+			"format": {
+				"months": "<span size='16pt'><b>CAL: {}\n</b></span>", 
+				"days": "<span size='10pt'><b>{}</b></span>", 
+				"weeks": "<span size='10pt'><b>{}</b></span>", 
+				"weekdays": "<span size='10pt'><b>{}</b></span>", 
+				"today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+		}
+		},
+	"actions": {
+		"on-scroll-up": "shift_down",
+		"on-scroll-down": "shift_up"
+	}
+    },
+
+    "pulseaudio": {
+        "format": "VOL: [ {icon} ] <span size='12pt'>{volume}%</span>",
+        "tooltip": true,
+	"tooltip-format": "DEVICE: {desc}",
+        "format-muted": "VOL: <span color='#B7416E'>[ !!MUTE!! ] <span size='12pt'>{volume}%</span></span>",
+        "on-click": "if [ $(pamixer --get-mute) == true ]; then pamixer --unmute; else pamixer --mute; fi",
+        "on-scroll-up": "pamixer -i 2",
+        "on-scroll-down": "pamixer -d 2",
+        "scroll-step": 2,
+	"reverse-scrolling": true,
+	"format-icons": ["░░░░░░░░", "█░░░░░░░", "██░░░░░░", "███░░░░░", "████░░░░", "█████░░░", "██████░░", "███████░", "████████"]
+    },
+
+    "network": {
+	"format-wifi": "NETWORK:\nINTERFACE: Wi-Fi <span size='12pt'>{bandwidthTotalBits}</span>",
+	"format-ethernet": "NET: ETH <span size='12pt'>{bandwidthTotalBits}</span>",
+	"tooltip-format-wifi": "ESSID: {essid}\nSTRENGTH: {signaldBm}\n\nADDRESS: {ipaddr}\nGATE: {gwaddr}\nMASK: {netmask} | {cidr}",
+	"tooltip-format-ethernet": "IFNAME: {ifname}\nADDRESS: {ipaddr}",
+	"format-disconnected": "NET: N/A",
+	"on-click": "nm-connection-editor"
+    },
+
+    "battery": {
+    	"states": {
+		"warning": 20,
+		"critical": 15
+	},
+	"format": "BAT: [ {icon} ] <span size='12pt'>{capacity}%</span>",
+	"interval": 5,
+	"format-charging": "BAT: [ {icon} ] <span size='12pt'>CHRG</span>",
+	"format-plugged": "BAT: [ {icon} ] <span size='12pt'>PLUG</span>",
+	"tooltip-format": "BATTERY: {power}W\nSTATUS: {timeTo}\nCYCLES: {cycles}\nHEALTH: {health}",
+	"format-icons": ["<span color='#B7416E'>CRITICAL", "<span color='#B7416E'>!!LOW!!!</span>", "██░░░░░░", "███░░░░░", "████░░░░", "█████░░░", "██████░░", "███████░", "████████"]
+    }
+}

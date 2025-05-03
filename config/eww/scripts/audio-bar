@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Get current volume as integer (0–100)
+volume=$(pamixer --get-volume)
+
+# Draw the bar
+bar_width=8
+filled=$(( volume * bar_width / 100 ))
+empty=$(( bar_width - filled ))
+
+bar=$(printf "%0.s█" $(seq 1 $filled))
+bar+=$(printf "%0.s░" $(seq 1 $empty))
+
+echo "Audio Output: [$bar] $volume%"
+

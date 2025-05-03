@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Get the current network interface (excluding loopback)
+get_connected_interface() {
+    interfaces=$(ip link | grep -oP '^\d+: \K[\w@.-]+' | grep -vE '^lo$')
+    for iface in $interfaces; do
+        if ip addr show "$iface" | grep -q "inet "; then
+            if ip link show "$iface" | grep -q "state UP"; then
+                echo "$iface"
+                return
+            fi
+        fi
+    done
+    echo "OFFLINE"
+}
+
+# Get the SSID if connected via Wi-Fi
+get_ssid() {
+    ssid=$(iwgetid -r)
+    if [ -n "$ssid" ]; then
+        echo "$ssid"
+    else
+        echo "N/A"
+    fi
+}
+
+# Main Logic
+case "$1" in
+    connectivity)
+        iface=$(get_connected_interface)
+        if [ "$iface" == "OFFLINE" ]; then
+            echo "OFFLINE"
+        else
+            echo "ONLINE"
+        fi
+        ;;
+    interface)
+        echo "$(get_connected_interface)"
+        ;;
+    ssid)
+        iface=$(get_connected_interface)
+        if [ "$iface" == "OFFLINE" ]; then
+            echo "N/A"
+        else
+            echo "$(get_ssid)"
+        fi
+        ;;
+    *)
+        echo "Usage: $0 {connectivity|interface|ssid}"
+        ;;
+esac
+

@@ -14,7 +14,7 @@ sort = false
 idle_threshold = 0
 layer = top
 gap_size = 0
-font = Roboto 12
+font = EnvyCodeR Nerd Font Mono 14
 line_height = 4
 dmenu = /usr/bin/rofi -no-lazy-grab -dmenu -theme /home/kaon/.config/rofi/kMenu
 browser = /usr/bin/firefox -new-tab
@@ -26,7 +26,7 @@ close = ctrl+space
 close_all = ctrl+shift+space
 history = ctrl+grave
 context = ctrl+shift+period
-format = "%b\n<small><b>%s</b></small>"
+format = "%b\n<small><b>[ %s ]</b></small>"
 
 [urgency_low]
 timeout = 4

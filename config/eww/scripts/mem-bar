@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Draw an 8-block bar based on % usage
+draw_bar() {
+    usage=$1
+    bar_width=8
+    filled=$(( usage * bar_width / 100 ))
+    empty=$(( bar_width - filled ))
+
+    bar=$(printf "%0.s█" $(seq 1 $filled))
+    bar+=$(printf "%0.s░" $(seq 1 $empty))
+    echo "[ $bar ]"
+}
+
+# Get memory and swap usage using `free -m`
+get_ram_usage() {
+    read -r _ total used _ <<< $(free -m | awk '/^Mem:/ { print $1, $2, $3 }')
+    echo $(( (used * 100) / total ))
+}
+
+get_swap_usage() {
+    read -r _ total used <<< $(free -m | awk '/^Swap:/ { print $1, $2, $3 }')
+    if [ "$total" -eq 0 ]; then
+        echo 0
+    else
+        echo $(( (used * 100) / total ))
+    fi
+}
+
+# CLI arg parser
+case "$1" in
+    ram)
+        ram=$(get_ram_usage)
+        echo "$(draw_bar $ram)"
+        ;;
+    swap)
+        swap=$(get_swap_usage)
+        echo "$(draw_bar $swap)"
+        ;;
+    *)
+        echo "Usage: $0 {ram|swap}"
+        exit 1
+        ;;
+esac
+
