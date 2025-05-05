@@ -16,20 +16,24 @@
 (defpoll net-stat-poll :interval "10s" "scripts/network-status connectivity")
 (defpoll net-interface-poll :interval "10s" "scripts/network-status interface")
 (defpoll net-ssid-poll :interval "10s" "scripts/network-status ssid")
+(defpoll get-workspace-poll :interval "1s" "scripts/get-workspace")
 
-(defwidget show-image []
-	(box	:halign "center"
+(defwidget show-workspace-widget []
+	(box	:orientation "h"
+		:halign "center"
 		:spacing 16
-
-		(image :path "images/iwak.jpg" :image-width 300 :preserve-aspect-ratio true)
+		:space-evenly "false"
+		:class "workspace-box"
+		
+		(label :text get-workspace-poll :class "workspace-name")
 	)
 )
 
 (defwidget net-widget []
 	(box	:orientation "h"
-		:halign "start"
+		:halign "center"
 		:space-evenly "false"
-		:spacing 16:w
+		:spacing 16
 
 		
 		(box	:orientation "h"
@@ -57,7 +61,7 @@
 
 (defwidget uptime-widget []
 	(box	:orientation "h"
-		:halign "start"
+		:halign "center"
 		:space-evenly "false"
 		:spacing 16
 		
@@ -78,7 +82,7 @@
 
 (defwidget mem-bar-widget []
 	(box	:orientation "h"
-		:halign "start"
+		:halign "center"
 		:space-evenly "false"
 		:spacing 16
 	
@@ -100,7 +104,7 @@
 
 (defwidget cpu-bar-widget []
 	(box	:orientation "h"
-		:halign "start"
+		:halign "center"
 		:space-evenly "false"
 		:spacing 16
 		
@@ -137,7 +141,7 @@
 
 (defwidget core-temp-widget []
 	(box	:orientation "h"
-		:halign "start"
+		:halign "center"
 		:spacing 16
 
 		(box	:orientation "h"
@@ -158,7 +162,7 @@
 	
 (defwidget os-info-widget []
 	(box	:orientation "h"
-		:halign "start"
+		:halign "center"
 		:space-evenly "false"
 		:spacing 16
 
@@ -181,10 +185,11 @@
 
 (defwidget sysinfo-widget []
 	(box 	:orientation "v" 
-		:halign "start" 
+		:halign "center" 
 		:valign "start"
 		:space-evenly false
 	
+		(show-workspace-widget)
 		(os-info-widget)
 		(uptime-widget)
 		(cpu-bar-widget)
@@ -194,7 +199,7 @@
 		(box	:orientation "h"
 			:space-evenly "false"
 			:class "nameinfo"
-			:halign "start"
+			:halign "center"
 			
 			(label :text "[ ")
 			(label :text name-poll)
@@ -209,7 +214,7 @@
 					:y "10px" 
 					:width "600px" 
 					:height "30px" 
-					:anchor "bottom left"
+					:anchor "center center"
 			)
 	:stacking "bg"
 	:exclusive false

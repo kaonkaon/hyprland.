@@ -7,6 +7,7 @@ rofi_command="rofi -theme $dir/$theme -no-fixed-num-lines"
 shutdown="Shutdown"
 reboot="Reboot"
 logout="Logout"
+lock="Lock"
 suspend="Suspend"
 
 confirm_exit() {
@@ -15,7 +16,7 @@ confirm_exit() {
 	[[ "$confirm" == "Yes" ]]
 }
 
-options="$shutdown\n$reboot\n$logout\n$suspend"
+options="$shutdown\n$reboot\n$logout\n$lock\n$suspend"
 uptime=$(uptime -p | sed -e 's/up //g')
 
 chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -lines 4 -selected-row 2)"
@@ -39,6 +40,9 @@ case $chosen in
 			# then logout
 			hyprctl dispatch exit
 		fi
+	;;
+	$lock)
+		hyprlock
 	;;
     	$suspend)
 		if confirm_exit; then

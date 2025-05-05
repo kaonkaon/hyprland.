@@ -1,0 +1,25 @@
+#!/bin/bash
+
+workspace_id=$(hyprctl activeworkspace -j | jq -r '.id')
+
+if [ $workspace_id == 1 ]; then
+	echo "Ich bin der Herr, dein Gott. Du sollst keine anderen Götter haben neben mir."
+elif [ $workspace_id == 2 ]; then
+	echo "Du sollst den Namen des Herrn, deines Gottes, nicht missbrauchen."
+elif [ $workspace_id == 3 ]; then
+	echo "Du sollst den Feiertag heiligen."
+elif [ $workspace_id == 4 ]; then
+	echo "Du sollst deinen Vater und deine Mutter ehren."
+elif [ $workspace_id == 5 ]; then
+	echo "Du sollst nicht töten."
+elif [ $workspace_id == 6 ]; then
+	echo "Du sollst nicht ehebrechen."
+elif [ $workspace_id == 7 ]; then
+	echo "Du sollst nicht stehlen."
+elif [ $workspace_id == 8 ]; then
+	echo "Du sollst nicht falsch Zeugnis reden wider deinen Nächsten."
+elif [ $workspace_id == 9 ]; then
+	echo "Du sollst nicht begehren deines Nächsten Haus."
+elif [ $workspace_id == 10 ]; then
+	echo "Du sollst nicht begehren deines Nächsten Weib, Knecht, Magd, Vieh noch alles, was dein Nächster hat. "
+fi

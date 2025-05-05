@@ -1,6 +1,6 @@
 * {
-  all: unset;
   font-family: "EnvyCodeR Nerd Font Mono";
+  all: unset;
   padding: 2px;
   color: #202020;
 }
@@ -12,4 +12,18 @@
 
 .varlabel {
   font-weight: bold;
+}
+
+.workspace-bracket {
+  font-weight: bold;
+  font-size: 300px;
+}
+
+.workspace-name {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.workspace-box {
+  padding: 50px;
 }
