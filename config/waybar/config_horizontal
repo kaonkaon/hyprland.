@@ -21,6 +21,7 @@
     	"cpu",
 	"memory",
         "pulseaudio",
+	"custom/updates",
 	"network"
     ],
 
@@ -136,5 +137,16 @@
 	"format-plugged": "BAT: [ {icon} ] <span size='8pt'>PLUG</span>",
 	"tooltip-format": "BATTERY: {power}W\nSTATUS: {timeTo}\nCYCLES: {cycles}\nHEALTH: {health}",
 	"format-icons": ["<span color='#B7416E'>CRITICAL", "<span color='#B7416E'>!!!!!!!!</span>", "██░░░░░░", "███░░░░░", "████░░░░", "█████░░░", "██████░░", "███████░", "████████"]
+    },
+
+    "custom/updates": {
+    	"format": "{} [ {icon} ]",
+	"return-type": "json",
+	"format-icons": {
+		"has-updates": "<span color='#B7416E'>!!!!!!</span>",
+		"updated": "<span color='#86e371'>UPDATE</span>"
+	},
+	"exec-if": "which waybar-module-pacman-updates",
+	"exec": "waybar-module-pacman-updates --no-zero-output"
     }
 }

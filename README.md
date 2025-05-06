@@ -19,6 +19,8 @@
   [eses](https://github.com/kaonkaon/eses)
   wl-paste
   swaybg
+  eww
+  waybar-module-pacman-updates-git
   ```
 
   also look at my [i3 rice](https://github.com/kaonkaon/Type94DotFiles)

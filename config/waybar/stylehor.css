@@ -22,7 +22,7 @@ tooltip {
 }
 
 #workspaces button.active {
-    color: @theme_selected_bg_color;
+    color: #c9b03e;
     background: @theme_bg_color;
 }
 

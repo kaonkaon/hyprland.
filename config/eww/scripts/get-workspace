@@ -3,23 +3,23 @@
 workspace_id=$(hyprctl activeworkspace -j | jq -r '.id')
 
 if [ $workspace_id == 1 ]; then
-	echo "Ich bin der Herr, dein Gott. Du sollst keine anderen Götter haben neben mir."
+	echo "「　思想を閉ざす事勿れ\n変化を恐るる事勿れ　」"
 elif [ $workspace_id == 2 ]; then
-	echo "Du sollst den Namen des Herrn, deines Gottes, nicht missbrauchen."
+	echo "「　望む真に非ず\n真実を常求めよ　」"
 elif [ $workspace_id == 3 ]; then
-	echo "Du sollst den Feiertag heiligen."
+	echo "「　科学をもって\n自然の理を理解せよ　」"
 elif [ $workspace_id == 4 ]; then
-	echo "Du sollst deinen Vater und deine Mutter ehren."
+	echo "「　各々は　己が肉体を制する権利を持つものなり　」"
 elif [ $workspace_id == 5 ]; then
-	echo "Du sollst nicht töten."
+	echo "「　善に神必要非ず　」"
 elif [ $workspace_id == 6 ]; then
-	echo "Du sollst nicht ehebrechen."
+	echo "「　自業あれば　自得あり　」"
 elif [ $workspace_id == 7 ]; then
-	echo "Du sollst nicht stehlen."
+	echo "「　己が欲するよう他を接せよ\n他の視点を尊重せよ　」"
 elif [ $workspace_id == 8 ]; then
-	echo "Du sollst nicht falsch Zeugnis reden wider deinen Nächsten."
+	echo "「　他人と　来たるべき未来を考慮せよ　」"
 elif [ $workspace_id == 9 ]; then
-	echo "Du sollst nicht begehren deines Nächsten Haus."
+	echo "「　人生一本道に非ず　」"
 elif [ $workspace_id == 10 ]; then
-	echo "Du sollst nicht begehren deines Nächsten Weib, Knecht, Magd, Vieh noch alles, was dein Nächster hat. "
+	echo "「　去れば花園を築くべし　」"
 fi
