@@ -1,0 +1,13 @@
+[Unit]
+Description=Toggle Waybar based on window presence
+After=graphical-session.target
+
+[Service]
+ExecStartPre=/bin/sleep 5
+ExecStart=%h/.local/bin/togglebar.sh
+Restart=always
+RestartSec=2
+Environment=PATH=%h/.local/bin:/usr/bin:/bin
+
+[Install]
+WantedBy=default.target
